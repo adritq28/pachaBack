@@ -29,25 +29,13 @@ public class SecurityConfig {
                 jwtAuthenticationFilter.setFilterProcessesUrl("/login");
 
                 return http
-                                .csrf().disable()
-                                .authorizeHttpRequests()
-                                .requestMatchers("/usuario/**").permitAll()
-                                .requestMatchers("/alertas/**").permitAll()
-                                .requestMatchers("/cultivos/**").permitAll()
-                                .requestMatchers("/datosHidrologica/**").permitAll()
-                                .requestMatchers("/datosEstacion/**").permitAll()
-                                .requestMatchers("/datos_pronostico/**").permitAll()
-                                .requestMatchers("/estacion/**").permitAll()
-                                .requestMatchers("/fenologia/**").permitAll()
-                                .requestMatchers("/email/**").permitAll()
-                                .requestMatchers("/municipio/**").permitAll()
-                                .requestMatchers("/observador/**").permitAll()
-                                .requestMatchers("/promotor/**").permitAll()
-                                .requestMatchers("/usuario/**").permitAll()
-                                .requestMatchers("/zona/**").permitAll()
-                                .anyRequest()
-                                .authenticated()
+                                .cors()
                                 .and()
+                                .csrf().disable()
+                                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                                                .requestMatchers("/**").permitAll() // Permite acceso a todas las rutas
+                                ).logout(logout -> logout.permitAll())
+
                                 .httpBasic()
                                 .and()
                                 .sessionManagement()
@@ -73,8 +61,9 @@ public class SecurityConfig {
                 return new BCryptPasswordEncoder();
         }
 
-        public static void main(String[] args) {
-                System.out.println("password: " + new BCryptPasswordEncoder().encode("123456"));
-        }
+        // public static void main(String[] args) {
+        // System.out.println("password: " + new
+        // BCryptPasswordEncoder().encode("123456"));
+        // }
 
 }

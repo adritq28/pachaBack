@@ -5,7 +5,6 @@ import java.util.TimeZone;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import jakarta.annotation.PostConstruct;
 
@@ -23,7 +22,8 @@ public class ProyectoApplication implements CommandLineRunner {
 
 	public void run(String... args) throws Exception {
 		System.out.println("_____corre_________");
-		System.out.println("password: " + new BCryptPasswordEncoder().encode("123456"));
+		// System.out.println("password: " + new
+		// BCryptPasswordEncoder().encode("123456"));
 
 	}
 
