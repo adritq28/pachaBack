@@ -15,16 +15,24 @@ public interface DatosPronosticoRepository extends JpaRepository<DatosPronostico
 
         List<DatosPronostico> findByIdCultivo(int idCultivo);
 
+        // @Query(value = "SELECT temp_max, temp_min, pcpn, fecha, fecha_rango_decenal "
+        // +
+        // "FROM ( " +
+        // "SELECT p.temp_max, p.temp_min, p.pcpn, p.fecha, p.fecha_rango_decenal " +
+        // "FROM cultivo c " +
+        // "JOIN datos_pronostico p ON c.id_cultivo = p.id_cultivo " +
+        // "WHERE c.id_cultivo = :idCultivo " +
+        // "ORDER BY p.id_pronostico DESC " +
+        // "LIMIT 10 " +
+        // ") AS subquery " +
+        // "ORDER BY subquery.fecha_rango_decenal ASC", nativeQuery = true)
+        // List<Object[]> pronosticoCultivo(@Param("idCultivo") int idCultivo);
+
         @Query(value = "SELECT temp_max, temp_min, pcpn, fecha, fecha_rango_decenal " +
-                        "FROM ( " +
-                        "SELECT p.temp_max, p.temp_min, p.pcpn, p.fecha, p.fecha_rango_decenal " +
-                        "FROM cultivo c " +
-                        "JOIN datos_pronostico p ON c.id_cultivo = p.id_cultivo " +
-                        "WHERE c.id_cultivo = :idCultivo " +
-                        "ORDER BY p.id_pronostico DESC " +
-                        "LIMIT 10 " +
-                        ") AS subquery " +
-                        "ORDER BY subquery.fecha_rango_decenal ASC", nativeQuery = true)
+                        "FROM datos_pronostico " +
+                        "WHERE id_cultivo = :idCultivo " +
+                        "ORDER BY fecha DESC, id_pronostico ASC " +
+                        "LIMIT 10", nativeQuery = true)
         List<Object[]> pronosticoCultivo(@Param("idCultivo") int idCultivo);
 
         @Query("select z.idZona, m.nombre, z.nombre from Municipio m join Zona z on m.idMunicipio=z.idMunicipio")
