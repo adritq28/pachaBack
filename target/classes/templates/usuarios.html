@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Usuarios con Estación</title>
+</head>
+<body>
+    <h1>Usuarios con Estación</h1>
+    <p th:text="${testMessage}"></p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID Usuario</th>
+                <th>Nombre Municipio</th>
+                <th>Nombre Estación</th>
+                <th>Tipo Estación</th>
+                <th>Nombre Completo</th>
+                <th>Teléfono</th>
+                <th>ID Estación</th>
+                <th>Código Tipo Estación</th>
+                <th>Imagen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario['idUsuario']}"></td>
+                <td th:text="${usuario['nombreMunicipio']}"></td>
+                <td th:text="${usuario['nombreEstacion']}"></td>
+                <td th:text="${usuario['tipoEstacion']}"></td>
+                <td th:text="${usuario['nombreCompleto']}"></td>
+                <td th:text="${usuario['telefono']}"></td>
+                <td th:text="${usuario['idEstacion']}"></td>
+                <td th:text="${usuario['codTipoEstacion']}"></td>
+                <td><img th:src="${usuario['imagen']}" alt="Imagen" width="100"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
